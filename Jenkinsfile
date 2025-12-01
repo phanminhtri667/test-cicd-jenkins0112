@@ -4,14 +4,14 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'This is Build Stage - First Stage 1'
+                echo 'Minh Tri ga vc - First Stage 1'
             }
         }
     
       
         stage('Test') {
             steps {
-                echo 'This is Test Stage - Second Stage 2'
+                echo 'This is Test Stage-hello  - Second Stage 2'
             }
         }
     
@@ -19,7 +19,7 @@ pipeline {
       
         stage('Release') {
             steps {
-                echo 'This is Release Stage - Third Stage'
+                echo 'This is Release Stage ez - Third Stage'
             }
         }
     }
