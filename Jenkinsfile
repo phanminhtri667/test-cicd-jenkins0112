@@ -26,7 +26,7 @@ pipeline {
             steps {
                 script {
                     // Đăng nhập vào GHCR
-                    docker.withRegistry("https://${GHCR}", "ghcr-credentials") {
+                    docker.withRegistry("https://${GHCR}", "github-token") {
                         echo "Logged in to GHCR"
                     }
                 }
@@ -37,14 +37,14 @@ pipeline {
             steps {
                 script {
                     // Build Docker image cho frontend
-                    sh 'docker build -t ${GHCR}/phanminhtri667/fullstack-frontend:${IMAGE_TAG} ./fullstack-frontend'
+                    sh 'docker build -t ${GHCR}/phanminhtri667/jenkins-frontend:${IMAGE_TAG} ./jenkins-frontend'
                     // Push Docker image cho frontend lên GHCR
-                    sh 'docker push ${GHCR}/phanminhtri667/fullstack-frontend:${IMAGE_TAG}'
+                    sh 'docker push ${GHCR}/phanminhtri667/jenkins-frontend:${IMAGE_TAG}'
 
                     // Build Docker image cho backend
-                    sh 'docker build -t ${GHCR}/phanminhtri667/fullstack-backend:${IMAGE_TAG} ./fullstack-backend'
+                    sh 'docker build -t ${GHCR}/phanminhtri667/jenkins-backend:${IMAGE_TAG} ./jenkins-backend'
                     // Push Docker image cho backend lên GHCR
-                    sh 'docker push ${GHCR}/phanminhtri667/fullstack-backend:${IMAGE_TAG}'
+                    sh 'docker push ${GHCR}/phanminhtri667/jenkins-backend:${IMAGE_TAG}'
                 }
             }
         }
