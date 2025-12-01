@@ -2,24 +2,38 @@ pipeline {
     agent any
 
     stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
         stage('Build') {
             steps {
-                echo 'Minh Tri ga vc - First Stage 1'
+                echo "Running CI build..."
+                sh 'cd fullstack-frontend && npm install && npm run build'
+                sh 'cd fullstack-backend && mvn clean install'
             }
         }
-    
-      
-        stage('Test') {
+
+        stage('Deploy to VM-master-2') {
             steps {
-                echo 'This is Test Stage-hello  - Second Stage 2'
-            }
-        }
-    
-     
-      
-        stage('Release') {
-            steps {
-                echo 'This is Release Stage ez - Third Stage'
+                sshagent(['gcp-worker-ssh']) {
+                    sh '''
+                        ssh -o StrictHostKeyChecking=no pmt@35.202.204.24 "
+                            docker-compose down || true
+
+                            cd /home/pmt/testCICDjenkins || git clone https://github.com/phanminhtri667/testCICDjenkins
+                            cd /home/pmt/testCICDjenkins
+
+                            git pull
+
+                            docker-compose build
+
+                            docker-compose up -d
+                        "
+                    '''
+                }
             }
         }
     }

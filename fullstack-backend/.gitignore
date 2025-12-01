@@ -1,0 +1,20 @@
+# Maven build output
+target/
+
+# IDE settings
+.idea/
+*.iml
+
+# Logs
+*.log
+
+# Environment and config
+.env
+application-dev.properties
+application-prod.properties
+
+# System files
+.DS_Store
+
+# Maven local repo accidentally copied
+.m2/

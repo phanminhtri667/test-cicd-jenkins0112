@@ -1,0 +1,18 @@
+# Maven build output
+target/
+
+# Git and docs
+.git
+README.md
+README
+
+# IDE settings
+.idea/
+*.iml
+
+# Logs and env
+*.log
+.env
+
+# Maven local repo
+.m2/
